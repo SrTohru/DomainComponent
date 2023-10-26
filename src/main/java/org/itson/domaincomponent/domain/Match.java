@@ -4,7 +4,6 @@
  */
 package org.itson.domaincomponent.domain;
 
-
 import org.itson.domaincomponent.dtos.PlayerPickTileDTO;
 import org.itson.domaincomponent.exceptions.GameException;
 import org.itson.domaincomponent.exceptions.MatchException;
@@ -110,6 +109,14 @@ public class Match implements Game {
 
             player.setGame(this);
         }
+    }
+
+    public boolean verifyConfiguration() {
+        return !(defaultTilesAmount <= 2 || defaultTilesAmount >= 7);
+    }
+
+    public int getDefaultTilesAmount() {
+        return defaultTilesAmount;
     }
 
     /**
@@ -264,7 +271,6 @@ public class Match implements Game {
 
     public void distributeTiles() throws MatchException, PoolException {
 
-
         if (players == null) {
             throw new MatchException("The Player's list recived was null.");
         }
@@ -272,8 +278,6 @@ public class Match implements Game {
         if (players.length == 0) {
             throw new MatchException("The Player's list recived was empty.");
         }
-
-      
 
         for (Player player : players) {
             for (int j = 0; j < defaultTilesAmount; j++) {

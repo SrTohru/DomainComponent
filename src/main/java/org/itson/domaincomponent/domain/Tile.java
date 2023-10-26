@@ -42,7 +42,8 @@ public class Tile {
      * Id of the tile
      */
     private Integer id;
-
+    
+    private boolean isMule;
     /**
      * Default constructor
      */
@@ -57,12 +58,13 @@ public class Tile {
      * @param secondFace First face of the tile, with default side "BOTTOM"
      * @param id Id of the tile
      */
-    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace) {
+    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, boolean isMule) {
 
         this.id = id;
         this.firstFace = firstFace.clone();
         this.secondFace = secondFace.clone();
         this.orientation = Orientation.VERTICAL;
+        this.isMule = isMule;
         this.defaultFaceSideValuesByOrientation();
     }
 
@@ -102,6 +104,16 @@ public class Tile {
         }
     }
 
+    public boolean isIsMule() {
+        return isMule;
+    }
+
+    public void setIsMule(boolean isMule) {
+        this.isMule = isMule;
+    }
+
+    
+    
     /**
      * Get the first face of the tile
      *
@@ -342,4 +354,8 @@ public class Tile {
         }
         return true;
     }
+    
+    
+    
+    
 }
