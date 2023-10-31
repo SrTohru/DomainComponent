@@ -4,11 +4,10 @@
  */
 package org.itson.domaincomponent.domain;
 
-
 import java.util.Objects;
 import org.itson.domaincomponent.enums.Orientation;
 import org.itson.domaincomponent.enums.Side;
-import org.itson.domaincomponent.interfaces.FaceTilePrototype;
+
 
 /**
  * @author Daniel Armando Pe�a Garcia ID:229185
@@ -42,8 +41,9 @@ public class Tile {
      * Id of the tile
      */
     private Integer id;
-    
+
     private boolean isMule;
+
     /**
      * Default constructor
      */
@@ -58,11 +58,11 @@ public class Tile {
      * @param secondFace First face of the tile, with default side "BOTTOM"
      * @param id Id of the tile
      */
-    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, boolean isMule) {
+    public Tile(Integer id, FaceTile firstFace, FaceTile secondFace, boolean isMule) {
 
         this.id = id;
-        this.firstFace = firstFace.clone();
-        this.secondFace = secondFace.clone();
+        this.firstFace = firstFace;
+        this.secondFace = secondFace;
         this.orientation = Orientation.VERTICAL;
         this.isMule = isMule;
         this.defaultFaceSideValuesByOrientation();
@@ -76,11 +76,11 @@ public class Tile {
      * @param orientation Orientation of the tile (HORIZONTAL, VERTICAL)
      * @param id Id of the tile
      */
-    public Tile(Integer id, FaceTilePrototype firstFace, FaceTilePrototype secondFace, Orientation orientation) {
+    public Tile(Integer id, FaceTile firstFace, FaceTile secondFace, Orientation orientation) {
 
         this.id = id;
-        this.firstFace = firstFace.clone();
-        this.secondFace = secondFace.clone();
+        this.firstFace = firstFace;
+        this.secondFace = secondFace;
         this.orientation = orientation;
         this.defaultFaceSideValuesByOrientation();
     }
@@ -112,8 +112,6 @@ public class Tile {
         this.isMule = isMule;
     }
 
-    
-    
     /**
      * Get the first face of the tile
      *
@@ -354,8 +352,5 @@ public class Tile {
         }
         return true;
     }
-    
-    
-    
-    
+
 }

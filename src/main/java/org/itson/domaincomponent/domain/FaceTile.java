@@ -9,7 +9,7 @@ import static org.itson.domaincomponent.enums.Side.BOTTOM;
 import static org.itson.domaincomponent.enums.Side.LEFT;
 import static org.itson.domaincomponent.enums.Side.RIGHT;
 import static org.itson.domaincomponent.enums.Side.TOP;
-import org.itson.domaincomponent.interfaces.FaceTilePrototype;
+
 
 /**
  * @author Daniel Armando Pe�a Garcia ID:229185
@@ -17,7 +17,7 @@ import org.itson.domaincomponent.interfaces.FaceTilePrototype;
  * @author Paul Alejandro Vazquez Cervantes ID:241400
  * @author Jose Eduardo Hinojosa Romero ID: 2356666
  */
-public class FaceTile implements FaceTilePrototype {
+public class FaceTile {
 
     /**
      * Side of the face (TOP, BOTTOM, RIGHT, LEFT)
@@ -53,11 +53,7 @@ public class FaceTile implements FaceTilePrototype {
      *
      * @return A new FaceTile instance cloned from the current instance.
      */
-    @Override
-    public FaceTile clone() {
-        return new FaceTile(this.side, this.value);
-    }
-
+ 
     /**
      * Get the side of the face
      *

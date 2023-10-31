@@ -3,12 +3,13 @@ package org.itson.domaincomponent.domain;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import org.itson.domaincomponent.dtos.PlayerPickTileDTO;
 import org.itson.domaincomponent.enums.Side;
 import org.itson.domaincomponent.exceptions.GameException;
 import org.itson.domaincomponent.exceptions.PoolException;
-import org.itson.domaincomponent.interfaces.FaceTilePrototype;
+
 
 /**
  * @author Daniel Armando Peña Garcia ID:229185
@@ -49,31 +50,27 @@ public class Pool extends GameElement {
 
     public LinkedList<Tile> createDominoTiles() throws PoolException {
 
-        if (this.tiles != null || !this.tiles.isEmpty()) {
+        if (!this.tiles.isEmpty()) {
             throw new PoolException("The Tiles has already created.");
         } else {
-            LinkedList<Tile> createdTiles = new LinkedList<>();
-            int tileId = 1;  // Identificador de ficha
+
+            int tileId = 1;
 
             for (int value1 = 0; value1 <= 6; value1++) {
-                for (int value2 = value1; value2 <= 6; value2++) { // Correcci�n en la condici�n
+                for (int value2 = value1; value2 <= 6; value2++) {
+                    
+                    Tile tile = new Tile(tileId, new FaceTile(Side.TOP, value1), new FaceTile(Side.BOTTOM, value2), isTileMule(value1, value2));
+                    tiles.add(tile);
 
-                    boolean isMule = value1 == value2;
-                    // Crea dos caras con los valores correspondientes
-                    FaceTilePrototype firstFacePrototype = new FaceTile(Side.TOP, value1);
-                    FaceTilePrototype secondFacePrototype = new FaceTile(Side.BOTTOM, value2);
-
-                    // Crea una ficha de domin� y agr�gala a la lista
-                    Tile tile = new Tile(tileId, firstFacePrototype, secondFacePrototype, isMule);
-                    createdTiles.add(tile);
                     tileId++;
                 }
             }
-
-            this.tiles = createdTiles;
-
             return tiles;
         }
+    }
+
+    public boolean isTileMule(Integer value1, Integer value2) {
+        return Objects.equals(value1, value2);
     }
 
     public Tile getHighestMuleOfList(LinkedList<Tile> tiles) throws PoolException {
@@ -109,11 +106,11 @@ public class Pool extends GameElement {
             for (int i = 0; i < player.getTiles().size(); i++) {
 
                 Tile tile = tiles.get(i);
-                
+
                 if (tile == null) {
-                    throw  new PoolException("The tile recived was null");
+                    throw new PoolException("The tile recived was null");
                 }
-                
+
                 if (tile.isMule()) {
                     mulesOfPlayer.add(tile);
                 }
